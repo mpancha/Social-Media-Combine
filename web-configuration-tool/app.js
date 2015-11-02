@@ -6,6 +6,9 @@ var YAML       = require('yamljs');
 var lentil_cfg = '/src/lentil/lentil_config.yml';
 var sfm_cfg    = '/src/sfm/sfm_config.txt';
 var app        = express();
+var gen        = require("./generate_webconfig.js");
+
+gen.generate_config();
 
 app.use('/',express.static(__dirname));
 app.use(bodyparser.json());
