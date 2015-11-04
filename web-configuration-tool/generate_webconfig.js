@@ -3,8 +3,8 @@ exports.generate_config = function(){
 var dataParser = require('data-file-parser');
 var fs = require('fs');
 dataParser.parse({
-    in: 'lentil_config.yml',    //input file 
-    out: 'lentil_config.json',    //output file 
+    in: '/src/lentil_config.yml',    //input file 
+    out: '/src/lentil_config.json',    //output file 
     var: 'configs',        //variable name 
     // g for global  
     // i for ignore case 
@@ -53,7 +53,7 @@ app.controller(\"FormController\", function($scope, $http, $templateCache) {\n\
    }
    content += fs.readFileSync('remaining.js', 'utf8');
    console.log(content);
-   fs.writeFileSync('js/controller.js', content, "utf8");
+   fs.writeFileSync('js/controllers.js', content, "utf8");
 })
 
 };
