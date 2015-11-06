@@ -1,10 +1,19 @@
 Web configuration Container
 ==========================
 
+Automatic WebApp Configuration
+------------------------------
+Different web frameworks incorporate differents methods of specifying application configuration parameters. Automatic WebApp configuration allows users to provide configuration parameters of the App using simple WebUI. 
+
+- Deploys a web configuration app to collect App's configuration parameters.
+- Automatically generates the angular schema form for App's configuration paramters from the configuration files.
+- Allows users to configure App parameters using Web UI before deployment.
+
 1. nodejs server
   - Runs nodejs server on 8080
 2. Angular schema form
-  - Lentil and SFM configuration form
-  - Performs form validation on client side
-3. express and fs module
+   - Automatically generates schema form from yaml
+   - Performs form validation on client side
+3. express, data-file-parser and fs module
   - fs module to generate configuration files
+  - data-file-parser module to parse yaml file
