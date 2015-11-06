@@ -1,10 +1,10 @@
-exports.generate_config = function(){
+exports.generate_config = function(config_file, out_file){
 
 var dataParser = require('data-file-parser');
 var fs = require('fs');
 dataParser.parse({
-    in: '/src/lentil_config.yml',    //input file 
-    out: '/src/lentil_config.json',    //output file 
+    in: config_file,    //input file 
+    out: config_file+'.json',    //output file 
     var: 'configs',        //variable name 
     // g for global  
     // i for ignore case 
@@ -22,9 +22,9 @@ app.controller(\"FormController\", function($scope, $http, $templateCache) {\n\
       \"properties\": {\n";
    var i=0;
    for (i=0; i < arr.length-1; i++){
-      content += "     \""+arr[i].key +"\": {\n";
-      content += "       \"title\": "+ arr[i].key +"\",\n";
-      content += "       \"description\": \"API client id retrieved from Instagram.\",\n";
+      content += "     \"" + arr[i].key + "\": {\n";
+      content += "       \"title\": " + "\"" + arr[i].key +"\",\n";
+      content += "       \"description\": \""+arr[i].key+"\",\n";
       content += "       \"type\": \"string\",\n";
       content += "       \"maxLength\": 100,\n";
       content += "       \"minLength\": 2,\n";
@@ -32,8 +32,8 @@ app.controller(\"FormController\", function($scope, $http, $templateCache) {\n\
       content += "     },\n";
    }
    content += "     \""+arr[i].key +"\": {\n";
-   content += "       \"title\": "+ arr[i].key +"\",\n";
-   content += "       \"description\": \"API client id retrieved from Instagram.\",\n";
+   content += "       \"title\": "+"\"" + arr[i].key +"\",\n";
+   content += "       \"description\": \"" + arr[i].key +"\",\n";
    content += "       \"type\": \"string\",\n";
    content += "       \"maxLength\": 100,\n";
    content += "       \"minLength\": 2,\n";
@@ -46,14 +46,14 @@ app.controller(\"FormController\", function($scope, $http, $templateCache) {\n\
    content += "     $scope.form = [";
    for (i = 0; i < arr.length; i++) {
       content += "    {\n    \"key\": \""+ arr[i].key+"\",\n";
-      content += "    \"placeholder\": \"Enter"+arr[i].key +"Value\",\n";
+      content += "    \"placeholder\": \"Enter " + arr[i].key +" Value\",\n";
       content += "    \"htmlClass\": \"content\",\n";
       content += "    \"labelHtmlClass\": \"ici_label\",\n";
       content += "    \"fieldHtmlClass\": \"ici_field\"\n   },";
    }
    content += fs.readFileSync('remaining.js', 'utf8');
    console.log(content);
-   fs.writeFileSync('js/controllers.js', content, "utf8");
+   fs.writeFileSync(out_file, content, "utf8");
 })
 
 };
