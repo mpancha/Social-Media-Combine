@@ -9,15 +9,19 @@ var gen        = require("./generate_webconfig.js");
 // find configuraiton files from the project directory
 
 var config_file = []
+var config_dir = []
 var separator = []
-config_file.push('lentil.yml');
+config_dir.push('../lentil/');
+config_file.push('lentil_config.yml');
+config_dir.push('../sfm/');
+config_file.push('sfm_config.txt');
 separator.push(":");
 separator.push("=");
 
 // generate schema forms
 for(var cfg in config_file){
      console.log(config_file[cfg]);
-     gen.generate_config(config_file[cfg], "js/"+config_file[cfg]+".js", separator[cfg]);
+     gen.generate_config(config_dir[cfg]+config_file[cfg], "js/"+config_file[cfg]+".js", separator[cfg]);
      gen.write_page(config_file[cfg]+".js");
 }
 
@@ -40,35 +44,36 @@ app.use('/',express.static(__dirname));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 
-app.post('/Submit',function(request,response){
+app.post('/Submit/:file',function(request,response){
   var jsonString = JSON.stringify(request.body);
   var jsonObj    = JSON.parse(jsonString);
+  var i = config_file.indexOf(request.file);
+  var cfg = config_dir[i] + config_file[i];
+  var type = request.file.indexOf('sfm');
 
-  for(var i in config_file)
-  {
-     var cfg = config_file[i];
-     fs.unlinkSync(cfg);
+  fs.unlinkSync(cfg);
 
-     fs.appendFileSync(cfg, "defaults: &defaults\n\n");
+  fs.appendFileSync(cfg, "defaults: &defaults\n\n");
 
-     for (var myKey in jsonObj) {
-        if (myKey.search("SFM") != -1) {
-          fs.appendFileSync(cfg, myKey + "=" + jsonObj[myKey] + "\n");
-        } else {
-          fs.appendFileSync(cfg, "   " + myKey + ": \"" + jsonObj[myKey] + "\"\n\n");
-        }
+  for (var myKey in jsonObj) {
+     if (type > -1) {
+        fs.appendFileSync(cfg, myKey + "=" + jsonObj[myKey] + "\n");
+     } else {
+        fs.appendFileSync(cfg, "   " + myKey + ": \"" + jsonObj[myKey] + "\"\n\n");
      }
-
+  }
+  if(type == -1)
+  {
      fs.appendFileSync(cfg, "development:\n  <<: *defaults\n\n");
      fs.appendFileSync(cfg, "test:\n  <<: *defaults\n\n");
      fs.appendFileSync(cfg, "staging:\n  <<: *defaults\n\n");
      fs.appendFileSync(cfg, "production:\n  <<: *defaults\n\n");
-     }
-     response.writeHead(200, {
-       'Content-Type': 'text/plain'
-     });
+  }
+  response.writeHead(200, {
+    'Content-Type': 'text/plain'
+  });
 
-     response.end('Hello, World!');
+  response.end('Hello, World!');
 });
 
 app.get('/configData', function (req, res){

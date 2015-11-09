@@ -1,5 +1,5 @@
 exports.generate_config = function(config_file, out_file, separator){
-
+   var path = require('path');
    var dataParser = require('data-file-parser');
    var fs = require('fs');
    if( separator == "=" ) 
@@ -28,8 +28,8 @@ exports.generate_config = function(config_file, out_file, separator){
      for (i=0; i < arr.length-1; i++){
        content += "     \"" + arr[i].key + "\": {\n";
        content += "       \"title\": " + "\"" + arr[i].key +"\",\n";
-       content += "       \"description\": \""+ arr[i].key.replace(/_/g," ")+"\",\n";
        content += "       \"type\": \"string\",\n";
+       content += "       \"description\": \""+ arr[i].key.replace(/_/g," ")+"\",\n";
        content += "       \"maxLength\": 100,\n";
        content += "       \"minLength\": 2,\n";
        content += "       \"validationMessage\": \"Entered value should be greater than 2 and less than 100 characters.\"\n";
@@ -59,6 +59,7 @@ exports.generate_config = function(config_file, out_file, separator){
        content += "    \"fieldHtmlClass\": \"ici_field\"\n   },";
     }
     content += fs.readFileSync('remaining.js', 'utf8');
+    content = content.replace("'Submit'","'Submit/"+path.basename(config_file)+"'")
     //console.log(content);
     fs.writeFileSync(out_file, content, "utf8");
   })
