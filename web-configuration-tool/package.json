@@ -8,6 +8,8 @@
     "fs": "~0.0.2",
     "yamljs": "~0.2.3",
     "bower": "~1.4.1",
-    "data-file-parser": "0.0.2"
+    "data-file-parser": "0.0.2",
+    "path": "~0.12.7",
+    "jquery": "~2.1.4"
   }
 }
