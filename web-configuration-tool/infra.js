@@ -55,11 +55,11 @@ app.post('/Submit/:file',function(request,response){
 });
 
 app.get('/configData', function (req, res){
-  var committed = YAML.load('/src/web-configuration-tool/committed/values.txt');
+  //var committed = YAML.load('/src/web-configuration-tool/committed/values.txt');
   res.send(committed);
 });
 
 var server=app.listen(8080,function(){
-  exec('sh commit.sh');
+  //exec('sh commit.sh');
   console.log("We have started our server on port 8080");
 });
