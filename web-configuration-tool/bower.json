@@ -15,6 +15,7 @@
   ],
   "dependencies": {
     "angular-schema-form": "~0.8.2",
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "angular-issue-9128-patch": "https://gist.github.com/beckyconning/9fe5450046cabfa5d104.git"
   }
 }
