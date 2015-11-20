@@ -20,8 +20,19 @@ Different web frameworks incorporate differents methods of specifying applicatio
 
 How to Run
 ----------
-1. clone the repo
+1. clone the repo and prepare
+```
+   git clone http://github.com/mpancha/Social-Media-Combine
+   cd Social-Media-Combine/web-configuration-tool
+   npm install;bower install
+```
 2. create ../lentil/lentil_config.yml and ../sfm/sfm_config.txt files.
-3. npm install; bower install
-4. run ./start_web_config.sh
+```
+  cp ../lentil/lentil_example_config.yml ../lentil/lentil_config.yml
+  cp ../sfm/sfm_example_config.txt ../sfm/sfm_config.txt
+```
+4. run application
+```
+./start_web_config.sh
+```
 5. Visit http://localhost:8080
