@@ -38,5 +38,5 @@ How to Run
   ```
 ./start_web_config.sh
   ```
-5. Visit http://localhost:8080
+5. Visit ```http://localhost:8080```
 
