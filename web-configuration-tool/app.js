@@ -10,9 +10,9 @@ var gen        = require("./generate_webconfig.js");
 var config_file = []
 var config_dir = []
 var separator = []
-config_dir.push('/src/lentil/');
+config_dir.push('../lentil/');
 config_file.push('lentil_config.yml');
-config_dir.push('/src/sfm/');
+config_dir.push('../sfm/');
 config_file.push('sfm_config.txt');
 separator.push(":");
 separator.push("=");
