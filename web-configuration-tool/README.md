@@ -17,3 +17,11 @@ Different web frameworks incorporate differents methods of specifying applicatio
 3. express, data-file-parser and fs module
   - fs module to generate configuration files
   - data-file-parser module to parse yaml file
+
+How to Run
+----------
+1. clone the repo
+2. create ../lentil/lentil_config.yml and ../sfm/sfm_config.txt files.
+3. npm install; bower install
+4. run ./start_web_config.sh
+5. Visit http://localhost:8080
