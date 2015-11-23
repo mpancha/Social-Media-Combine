@@ -10,9 +10,9 @@ var app        = express();
 var config_file = []
 var config_dir = []
 var separator = []
-config_dir.push('../lentil/');
+config_dir.push('/src/lentil/');
 config_file.push('lentil_config.yml');
-config_dir.push('../sfm/');
+config_dir.push('/src/sfm/');
 config_file.push('sfm_config.txt');
 separator.push(":");
 separator.push("=");
@@ -24,9 +24,13 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.post('/Submit/:file',function(request,response){
        var jsonString = JSON.stringify(request.body);
        var jsonObj    = JSON.parse(jsonString);
-       var i = config_file.indexOf(request.file);
        var cfg = request.url.substring(8);
        var type = request.url.indexOf('sfm');
+       if (type < 0){
+           cfg = "/src/lentil/lentil_config.yml"
+       }else{
+           cfg = "/src/sfm/sfm_config.txt"
+       }
        console.log(cfg);
        
        fs.unlinkSync(cfg);
@@ -47,6 +51,8 @@ app.post('/Submit/:file',function(request,response){
           fs.appendFileSync(cfg, "staging:\n  <<: *defaults\n\n");
           fs.appendFileSync(cfg, "production:\n  <<: *defaults\n\n");
        }
+       exec('sh commit.sh');
+       exec('sh reconfig.sh');
        response.writeHead(200, {
          'Content-Type': 'text/plain'
        });
@@ -55,11 +61,11 @@ app.post('/Submit/:file',function(request,response){
 });
 
 app.get('/configData', function (req, res){
-  //var committed = YAML.load('/src/web-configuration-tool/committed/values.txt');
+  var committed = YAML.load('/src/web-configuration-tool/committed/values.txt');
   res.send(committed);
 });
 
 var server=app.listen(8080,function(){
-  //exec('sh commit.sh');
+  exec('sh commit.sh');
   console.log("We have started our server on port 8080");
 });
