@@ -60,6 +60,7 @@ exports.generate_config = function(config_file, out_file, separator){
     }
     content += fs.readFileSync('remaining.js', 'utf8');
     content = content.replace("'Submit'","'Submit/"+path.basename(config_file)+"'")
+    content = content.replace("'configData'","'configData"+path.basename(config_file)+"'")
     //console.log(content);
     fs.writeFileSync(out_file, content, "utf8");
   })
