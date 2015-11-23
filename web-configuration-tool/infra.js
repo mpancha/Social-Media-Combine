@@ -60,8 +60,12 @@ app.post('/Submit/:file',function(request,response){
        response.end('Hello, World!');
 });
 
-app.get('/configData', function (req, res){
-  var committed = YAML.load('/src/web-configuration-tool/committed/values.txt');
+app.get('/configDatalentil*', function (req, res){
+  var committed = YAML.load('/src/web-configuration-tool/committed/values_lentil.txt');
+  res.send(committed);
+});
+app.get('/configDatasfm*', function (req, res){
+  var committed = YAML.load('/src/web-configuration-tool/committed/values_sfm.txt');
   res.send(committed);
 });
 
