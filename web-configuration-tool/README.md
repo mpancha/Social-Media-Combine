@@ -18,25 +18,10 @@ Different web frameworks incorporate differents methods of specifying applicatio
   - fs module to generate configuration files
   - data-file-parser module to parse yaml file
 
-How to Run
-----------
-1. Clone the repo and prepare
-
-   ```
-   git clone http://github.com/mpancha/Social-Media-Combine
-   cd Social-Media-Combine/web-configuration-tool
-   npm install;bower install
-   ```
-2. Create ../lentil/lentil_config.yml and ../sfm/sfm_config.txt files.
-
-   ```
-  cp ../lentil/lentil_example_config.yml ../lentil/lentil_config.yml
-  cp ../sfm/sfm_example_config.txt ../sfm/sfm_config.txt
-  ```
-4. Run application
-
-  ```
-./start_web_config.sh
-  ```
-5. Visit ```http://localhost:8080```
-
+To Do
+=====
+1. Identify config file type and fix /post to write config file based on type (remove the hack).
+2. Automatic identification of config files.
+3. Make reconfig using Docker API in vagrant as well (similar to docker provider).
+4. Certificates for Docker secure API.
+5. Build new image for webconfig and push to docker hub (ncsudlilibraries/combine_webconfig)
